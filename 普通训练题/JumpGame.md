@@ -21,7 +21,7 @@
 ```c++
 bool canJump(vector<int>& nums) {
         int len = nums.size();
-        int right = 0;
+        int right = 0;//范围的最右边
         for(int i = 0; i < len; i++){
             if(right < i)  return false;
             else right = max(right, i + nums[i]);
