@@ -100,6 +100,105 @@ while(v!=res.end()){
   v++;}
 ```
 
+### set  
+```c++
+元素唯--一去重,有序--红黑树
+定义集合set:
+1.set<int> s;
+2.还可以把一个数组放进去：set<int> s(arr.begin(),arr.end());
+set方法：
+1.insert(elem)  向set容器中插入元素，无返回值
+  insert(pos,elem) 指定pos插入elem
+2.erase(elem)   按元素值删除元素，无返回值
+  erase(iterator pos)    移除pos所指元素位置，无返回值,这里的pos是迭代器指针
+  erase(iterator begin, iterator end)移除begin,end区间内所有元素，无返回值
+
+3.begin()   容器中第一个元素的索引，*(s.begin())为该元素的值
+4.end()     指向容器中最后一个元素的下一位
+5.rbegin()  容器中最后一个元素的索引
+6.rend()    容器中第一个元素的索引
+
+7.size()    set容器的大小
+10.empty()  容器是否为空，空为true
+11.clear()  清空容器
+
+8.find(elem)   返回被查找到元素在原数组中是第一个被插入的,返回索引
+9.count(elem)  返回某个元素出现的个数
+
+12.upper_bound(elem)  返回元素值>elem的第一个元素位置
+13.lower_bound(elem)  返回元素值>=elem的第一个元素位置
+14.equal_range(elem)  返回元素值==elem的区间
+```
+
+### multiset同set方法，有序且允许重复。  
+```c++
+int main() {
+    multiset<int> st;
+    vector<int> nums = {1,4,5,7,2,5};
+    //插入元素
+    for(int i = 0; i < nums.size(); i++){
+        st.insert(nums[i]);
+    }
+    //遍历迭代器
+    multiset<int>::iterator it;
+    for(it = st.begin(); it != st.end(); it++){
+		printf("%d ",*it); //会将存放的元素全部输出
+	  }
+    st.erase(st.find(2));//find-找到元素为2的索引,erase-删除
+    cout<<endl;
+    for(it = st.begin(); it != st.end(); it++){
+		printf("%d ",*it); //会将存放的元素全部输出
+	 } 
+    cout<<endl;
+    //元素最大最小值
+    cout<<*st.begin()<<" "<<*st.rbegin();
+    return 0;
+}
+
+```
+### unordered_map  
+```c++
+http://www.cplusplus.com/reference/unordered_map/unordered_map/at/
+内部实现哈希表，查询快速，与map用法相同
+插入
+insert(pair<,>());
+map[index]=?;
+map.insert(m.begin(),m.end());
+查找
+find()//返回迭代器值
+count()//记数,也可以用于判断是否已经存在
+修改
+map.at("shioas") = 312;
+
+遍历
+begin()
+end()
+iter->first
+iter->second
+
+int main() {
+    //初始化与插入
+    unordered_map<int,string> myMap = {{ 0, "张大" },{ 1, "李五" }};
+    myMap[2] = "xixi";
+    //①
+    myMap.insert(pair<int, string>(3, "陈二"));
+    //②
+    // pair<int, string> myshopping (5,"baking powder");
+    // unordered_map<int,string> myMap1;
+    // myMap1.insert(myshopping);
+    
+    // myMap1.insert(myMap.begin(),myMap.end());//插入至新map
+    //遍历
+    for(auto iter = myMap.begin(); iter != myMap.end(); iter++){
+        cout << iter->first << "," << iter->second << endl;  
+    }
+    //查找find，返回迭代器
+    auto iterator = myMap.find(2);//find()返回一个指向2的迭代器
+    if (iterator != myMap.end())
+	    cout << endl<< iterator->first << "," << iterator->second << endl;  
+    return 0;
+}
+```
 ### 字符串
 ```c++
 字符串长度
